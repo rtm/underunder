@@ -4,26 +4,26 @@
 /*global __ */
 
 __.box=__.class.new()
-	.ctor(function(o){
-		o=o||{};
-		this.l=o.l;
-		this.r=o.r;
-		this.t=o.t;
-		this.b=o.b;
-	})
-	.proto({
-		expand      : function(n,slop){
-			if(typeof slop==="undefined"){slop=2;}
-			this.t -= slop;
+    .ctor(function(o){
+	o=o||{};
+	this.l=o.l;
+	this.r=o.r;
+	this.t=o.t;
+	this.b=o.b;
+    })
+    .proto({
+	expand      : function(n,slop){
+	    if(typeof slop==="undefined"){slop=2;}
+	    this.t -= slop;
             this.b += slop;
             this.l -= slop;
             this.r += slop;
-			
+	    
             if(this.t < 3  ) {this.t=0;  }
             if(this.l < 3  ) {this.l=0;  }
             if(this.b > n-4) {this.b=n-1;}
             if(this.r > n-4) {this.r=n-1;}
-			
+	    
             return this;
         },
         contains    : function(xy){
@@ -46,21 +46,21 @@ __.box=__.class.new()
             this.b = !this.b ? b2.b : !b2.b ? this.b : Math.max(this.b,b2.b);
             return this;
         }
-	})
-	.static({
-		max       : function(boxes){
-			//return bounding box for an array of boxes
-			function fun(p,f){return f.apply(0,__.array.pluck(boxes,p));}
-			return {
-				t:fun('t',Math.min),
-				b:fun('b',Math.max),
-				l:fun('l',Math.min),
-				r:fun('r',Math.max)
-			};
-		},
-		full      : function(n){
-			//return an nxn box
-			return this.new({t:0,l:0,b:n-1,r:n-1});
-		}
-	})
+    })
+    .static({
+	max       : function(boxes){
+	    //return bounding box for an array of boxes
+	    function fun(p,f){return f.apply(0,__.array.pluck(boxes,p));}
+	    return {
+		t:fun('t',Math.min),
+		b:fun('b',Math.max),
+		l:fun('l',Math.min),
+		r:fun('r',Math.max)
+	    };
+	},
+	full      : function(n){
+	    //return an nxn box
+	    return this.new({t:0,l:0,b:n-1,r:n-1});
+	}
+    })
 ;

@@ -5,8 +5,8 @@ __.array.set={
         return this.__.array.unique([].concat.apply([],arguments));
     },
     intersection  : function(a1,a2){
-		//intersection of two arrays: elements held in common
-		//to take intersection of multiple arrays, do [arrays].reduce(__.array.intersection)
+	//intersection of two arrays: elements held in common
+	//to take intersection of multiple arrays, do [arrays].reduce(__.array.intersection)
         return a1.filter(__.array.contains.bind(0,a2));
     },
     difference    : function(a1,a2){

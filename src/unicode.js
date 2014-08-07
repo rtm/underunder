@@ -10,17 +10,17 @@ __.unicode={
             convert    : function(start,end,adjust,z){
                 //function which offsets code points in a string in a given range
                 return String.fromCharCode.apply(
-					0,
-					__.string.toCharCode(String(z)).map(function(c){return c>=start&&c<=end?c+adjust:c;})
-				);
+		    0,
+		    __.string.toCharCode(String(z)).map(function(c){return c>=start&&c<=end?c+adjust:c;})
+		);
             },
             from       : function(z){
-				return this.convert(this.ZEN_START, this.ZEN_END, -this.HAN_TO_ZEN, z);
-			},
+		return this.convert(this.ZEN_START, this.ZEN_END, -this.HAN_TO_ZEN, z);
+	    },
             to         : function(z){
-				return this.convert(this.HAN_START, this.HAN_END,  this.HAN_TO_ZEN, z);
-			}
-		},
+		return this.convert(this.HAN_START, this.HAN_END,  this.HAN_TO_ZEN, z);
+	    }
+	},
         re         : {
             //__.unicode.fw.re.katakana, etc.
             katakana     : "[\u30a0-\u30ff]",
@@ -57,7 +57,7 @@ __.unicode={
         "◇" : {c: "w", n: "diamond"},
         "●" : {c: "b", n: "circle"},
         "○" : {c: "w", n: "circle"},
-//        "✖" : {c: "b", n: "cross"},
+        //        "✖" : {c: "b", n: "cross"},
         "✖" : {c: "w", n: "cross"},
         "▴" : {c: "b", n: "small_triangle_up"},
         "▵" : {c: "w", n: "small_triangle_up"},
