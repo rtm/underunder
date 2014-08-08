@@ -1,5 +1,5 @@
 module Boo {
-	export var foo = 1;
+    export var foo = 1;
 }
 
 
@@ -34,7 +34,7 @@ var a = a => a*2;
 [for (x of [1,2,3]) x];
 
 class Foo {
-	constructor(x) { this.x = x; }
+    constructor(x) { this.x = x; }
     bar(foo) { console.log(foo); }
 }
 var foo = new Foo();
