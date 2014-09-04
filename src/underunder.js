@@ -43,3 +43,4 @@ var __ = {
     }
 };
 
+module.exports = __;
