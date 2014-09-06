@@ -54,27 +54,27 @@ describe('#array_test', function() {
   it('returns the new array with specified value omitted', function() {
     var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     var result = array.omit(arr, 2);
-    array.contains(result, 2).should.equal(0);
+    array.contains(result, 2).should.equal(false);
   });
 
-  it('overlays the elements of second array on to the first array starting from specified index', function() {
-    var arr1 = [1,2,3,4,5];
+  it('fills in missing elements in array1 with elements in array2', function() {
+    var arr1 = [1,2,3];
     var arr2 = [10, 20, 30, 40, 50];
-    var result = array.overlay(arr1, arr2, 3);
-    var expectedResults = [1, 2, 3, 10, 20, 30, 40, 50];
+    var result = array.defaults(arr1, arr2, 3);
+    var expectedResults = [1, 2, 3, 40, 50];
     for(var i = 0, j = expectedResults.length; i < j; i++) {
       result[i].should.equal(expectedResults[i]);
     }
   });
   
-  xit('fills in missing elements into array1, with elements in array2', function() {
-    var arr1 = [1, 2, 3, 4, 5];
+  it('fills in elements into array1, with elements in array2', function() {
+    var arr1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     var arr2 = [10, 20, 30, 40, 50];
     var result = array.overlay(arr1, arr2, 3);
-    var expectedResults = [1, 2, 3, 10, 20, 30, 40, 50];
-    var res = array.defaults(arr1, arr2);
-    console.log(res);
-    return true;
+    var expectedResults = [1, 2, 3, 10, 20, 30, 40, 50, 9, 10];
+    for(var i = 0, j = expectedResults.length; i < j; i++) {
+      result[i].should.equal(expectedResults[i]);
+    }
   });
 
   it('transforms an array with duplicates into a set', function() {
@@ -82,7 +82,13 @@ describe('#array_test', function() {
     var res = array.unique(arr1);
     res.length.should.equal(7);
   });
-  
+
+  it('plucks properties from objects in an array', function() {
+    var arr = [{x: 1}, {x: 2}];
+    var res = array.pluck(arr, 'x');
+    (res+'').should.equal([1,2]+'');
+  });
+
   it('creates a range from a to b', function() {
     var range = array.range(10,100);
     for(var i = 10, j = 0; i < 100, j < range.length; i++, j++) {
@@ -105,15 +111,46 @@ describe('#array_test', function() {
     array.count(arr, function is_even(x) { return x%2 === 0; }).should.equal(49);
   });
   
-  xit('creats n instances of the passed in array', function() {
-    var arr = array.range(10);
-    console.log(array.repeat(arr, 5));
-    return true;
+  it('creates n instances of the passed in parameter', function() {
+    var arr = array.repeat(1, 5);
+    for(var i = 0, j = arr.length; i < j; i++) {
+      arr[i].should.equal(1);
+    }
+    arr.length.should.equal(5);
   });
 
- it('coerces the passed in scalar into an array', function() {
-   var s = 5;
-   var arr = array.coerce(s);
-   array.is(arr).should.equal(true);
+  it('maps array values based on a function', function() {
+    function add_one(x){return x+1;}
+    var arr = [1,2];
+    var res = array.map(arr,add_one);
+    var expectedResult = arr.map(add_one);
+    (res.toString()).should.equal(expectedResult.toString());
+  });
+
+  it('creates an object with array values as keys', function() {
+    function mung(x) {return x+'x';}
+    var arr=['a', 'b'];
+    var res = array.map_to_object(arr,mung);
+    var keys = Object.keys(res);
+	var expectedResult = {a:'ax', b:'bx'};
+    for (var p in keys) {
+      (res[keys[p]]).should.equal(expectedResult[keys[p]]);
+    }
+  });
+
+  it('determines if the array contains a value', function() {
+    var arr=[1,2];
+    (array.contains(arr,1)).should.be.true;
+  });
+
+  it('determines if the array does not contain a value', function() {
+    var arr=[1,2];
+    (array.does_not_contain(arr,3)).should.be.true;
+  });
+
+  it('coerces the passed in scalar into an array', function() {
+    var s = 5;
+    var arr = array.coerce(s);
+    array.is(arr).should.equal(true);
  });
 });
