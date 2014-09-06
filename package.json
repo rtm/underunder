@@ -1,0 +1,42 @@
+{
+    "name": "underunder",
+    "description": "Definitive utilities for modern JS programming",
+    "version": "0.0.5",
+    "homepage": "https://github.com/rtm/underunder",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/rtm/underunder.git"
+    },
+    "bugs": {
+        "url": "https://github.com/rtm/underunder/issues"
+    },
+    "author": {
+        "name": "Bob Myers",
+        "email": "rtm@gol.com"
+    },
+    "contributors": [
+        {
+            "name": "Hrishikesh",
+            "email": "",
+            "url": ""
+        }
+    ],
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://github.com/jeremyosborne/packagejsonexample/blob/master/LICENSE.txt"
+        }
+    ],
+    "main": "src/underunder.js",
+    "engines": {
+        "node": ">= 0.6.x"
+    },
+    "dependencies": {
+    },
+    "devDependencies": {
+        "docco": "*"
+    },
+    "scripts": {
+        "dist": "node dist; node node_modules/.bin/docco src/package.js"
+    }
+}
