@@ -1,3 +1,7 @@
+var __ = require('../src/underunder');
+
+__.array = require('../org/array');
+
 __.functional={
     is			  : function(x) {
 	return Object.prototype.toString.call(x) === "[object Function]";
@@ -62,7 +66,7 @@ __.functional={
 	return {
 	    swap	  : function(f) {
 		//transform a function so as to reverse the order of two arguments
-		return transform(f,function(args){args.slice(0,2).reverse();});
+		return transform(f,function(args){ return args.slice(0,2).reverse();});
 	    },
 	    reverse	  : function(f){
 		//return a function to revese the order of all arguments
@@ -146,3 +150,5 @@ __.functional={
 	return args;
     }
 };
+
+module.exports =  __.functional;
